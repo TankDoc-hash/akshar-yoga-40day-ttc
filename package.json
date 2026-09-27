@@ -1,0 +1,18 @@
+{
+  "name": "akshar-yoga-40-day-residential-ttc",
+  "version": "1.0.0",
+  "description": "Akshar Yoga 40-Day Basic Level Residential Teacher Training Course Landing Page",
+  "main": "scripts/local-server.js",
+  "scripts": {
+    "start": "node scripts/local-server.js"
+  },
+  "keywords": [
+    "akshar-yoga",
+    "yoga-ttc",
+    "teacher-training",
+    "residential-yoga",
+    "200-hour-yoga"
+  ],
+  "author": "Akshar Yoga Kendraa",
+  "license": "UNLICENSED"
+}

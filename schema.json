@@ -1,0 +1,217 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "EducationalOrganization",
+      "@id": "https://aksharyoga.com/#organization",
+      "name": "Akshar Yoga Kendraa",
+      "legalName": "Akshar Yoga Kendraa Private Limited",
+      "url": "https://aksharyoga.com",
+      "logo": "https://aksharyoga.com/images/akshar_yoga_logo.png",
+      "description": "Premier international yoga educational institution imparting Himalayan yogic wisdom, teacher training certifications, and residential holistic wellness retreats.",
+      "telephone": "+918971700394",
+      "email": "info@aksharyoga.com",
+      "sameAs": [
+        "https://www.facebook.com/aksharyogakendraa/",
+        "https://www.instagram.com/aksharyoga/",
+        "https://www.youtube.com/c/AksharYoga"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Sadashivanagar / CSE Residences & Purantha Campus",
+        "addressLocality": "Bangalore",
+        "addressRegion": "Karnataka",
+        "postalCode": "560080",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 13.0827,
+        "longitude": 77.5877
+      }
+    },
+    {
+      "@type": "Course",
+      "@id": "https://aksharyoga.com/basic-residential-ttc/#course",
+      "name": "40-Day Basic Level Residential Yoga Teacher Training Course (200 Hours)",
+      "courseCode": "AY-TTC-200",
+      "description": "An immersive 40-day yoga teacher training experience designed to deepen your personal practice, build a strong foundation in yoga, and prepare you to begin your journey as a yoga teacher. Features 200 hours of asana biomechanics, pranayama, meditation, mudras, philosophy, and teaching methodology.",
+      "provider": {
+        "@id": "https://aksharyoga.com/#organization"
+      },
+      "timeRequired": "P40D",
+      "coursePrerequisites": "Open to dedicated practitioners and beginners looking to build a structured foundation.",
+      "educationalCredentialAwarded": "Akshar Yoga Basic Level Yoga Teacher Certificate (200 Hours)",
+      "inLanguage": "en",
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "courseMode": "OnSite",
+          "courseWorkload": "PT200H",
+          "location": {
+            "@type": "Place",
+            "name": "Akshar Yoga Purantha & CSE Residences",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Bangalore",
+              "addressRegion": "Karnataka",
+              "addressCountry": "IN"
+            }
+          }
+        }
+      ],
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Seeker (Tuition Only)",
+          "description": "40 Days of Training, study material, 2 diet consultations, 6-month DYC access, 3 Ayurveda sessions, special training at Purantha, Awaken Tribe access, and 3-day Purantha camp access.",
+          "price": "175000",
+          "priceCurrency": "INR",
+          "category": "Tuition Only",
+          "availability": "https://schema.org/InStock",
+          "validFrom": "2026-09-01",
+          "url": "https://aksharyoga.com/basic-residential-ttc#experience-options"
+        },
+        {
+          "@type": "Offer",
+          "name": "Immersive (CSE Residential)",
+          "description": "40 Days of Training, TTC material, 1 BHK accommodation at CSE Residences, nutritious food, dedicated travel, 6-month DYC and Awaken Tribe access, Purantha experiences, and 3-day Purantha camp access.",
+          "price": "350000",
+          "priceCurrency": "INR",
+          "category": "Tuition and Accommodation",
+          "availability": "https://schema.org/InStock",
+          "validFrom": "2026-09-01",
+          "url": "https://aksharyoga.com/basic-residential-ttc#experience-options"
+        },
+        {
+          "@type": "Offer",
+          "name": "Ultimate (Purantha Immersion Sanctuary)",
+          "description": "40 Days of Training, full Purantha campus nature sanctuary access, 3 Ayurveda sessions, 2 medicinal showers, 2 tissue healing sessions, organic Sattvik food, 1-year Awaken Tribe and DYC access, and 3-day Purantha camp access.",
+          "price": "500000",
+          "priceCurrency": "INR",
+          "category": "Tuition, Accommodation and Healing Sanctuary",
+          "availability": "https://schema.org/InStock",
+          "validFrom": "2026-09-01",
+          "url": "https://aksharyoga.com/basic-residential-ttc#experience-options"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://aksharyoga.com/basic-residential-ttc/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How long is the TTC?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The TTC is a full 40-day intensive course comprising 200 hours of structured learning, daily practice, and teaching methodology."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this a residential programme?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "There are three participation/residential options to fit your needs: Seeker (non-residential for local students), Immersive (comfortable 1 BHK stay, food, and local transit at CSE Residences), and Ultimate (complete sanctuary living at Purantha)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is included in the Seeker (₹1.75 lakh) option?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Seeker (₹1.75 Lakh INR) option includes 40 days of training, all TTC materials, 2 diet/health consultations, 6-month DYC access, 3 Ayurveda therapy sessions at Purantha, special training sessions at Purantha, 6 months Awaken Tribe membership, and 3-day Purantha Camp access. Stay, food, and travel are not included."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is included in the Immersive (₹3.5 lakh) option?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Immersive (₹3.5 Lakh INR) option includes 40 days training, TTC materials, 1 BHK accommodation at CSE Residences, food, travel, 6 months DYC access, 6 months Awaken Tribe membership, Purantha experiences, and 3-day Purantha Camp access."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is included in the Ultimate (₹5 lakh) option?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Ultimate (₹5 Lakh INR) option is our premier sanctuary immersion tier. It includes 40 days training, full Purantha campus access, 3 Ayurveda sessions, 2 medicinal showers, 2 tissue healing sessions (subject to expert recommendation), pure Sattvik food, 1 year of Awaken Tribe and DYC access, and 3-day Purantha Camp access."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need previous yoga experience?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No prior advanced experience is required. The curriculum begins with foundational alignment and anatomy, making it ideal for both dedicated beginners seeking deep immersion and experienced practitioners preparing to teach professionally."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What certification do I receive?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Upon successful practical and theoretical completion of the 40 days (200 hours), you receive the official Akshar Yoga Basic Level Yoga Teacher Certificate, recognized across the global Akshar Yoga ecosystem."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is food included?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Food is fully included in the Immersive (₹3.5L) and Ultimate (₹5L) options. For the Seeker (₹1.75L) tier, meals and accommodation are not included."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is accommodation included?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, accommodation is included in the Immersive option (1 BHK stay at CSE Residences) and the Ultimate option (full campus sanctuary at Purantha). For the Seeker option, students arrange their own stay in Bangalore."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can international students apply?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we welcome international applicants from all continents. Please contact our admissions team for personalized travel advice, airport reception, and payment guidelines."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I apply?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Click any 'Apply Now' button to complete the short 2-step application form. Our admissions team will review your profile and connect via phone or WhatsApp within 24 hours."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://aksharyoga.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Teacher Training Courses",
+          "item": "https://aksharyoga.com/teacher-training"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "40-Day Basic Residential TTC",
+          "item": "https://aksharyoga.com/basic-residential-ttc"
+        }
+      ]
+    }
+  ]
+}

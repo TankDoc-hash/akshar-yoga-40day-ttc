@@ -1,0 +1,35 @@
+# Robots.txt for Akshar Yoga Teacher Training Course
+# https://aksharyoga.com/basic-residential-ttc
+
+User-agent: *
+Allow: /
+Allow: /styles.css
+Allow: /app.js
+Allow: /images/
+Allow: /llms.txt
+Allow: /schema.json
+
+# LLM Crawler & AI Search Engines
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Sitemaps
+Sitemap: https://aksharyoga.com/sitemap.xml

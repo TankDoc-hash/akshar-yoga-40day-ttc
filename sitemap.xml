@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://aksharyoga.com/basic-residential-ttc</loc>
+    <lastmod>2026-09-25T17:00:00+05:30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://aksharyoga.com/images/hero_akshar_mountain_meditation_hd.jpg</image:loc>
+      <image:title>Himalayan Siddha Akshar Mountain Meditation - 40-Day Basic Residential TTC</image:title>
+      <image:caption>Himalayan Siddha Akshar in meditation overlooking Himalayan peaks</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://aksharyoga.com/images/section2_akshar_lounge.webp</image:loc>
+      <image:title>Akshar Yoga Kendraa Centre Lounge and Emblem</image:title>
+      <image:caption>Authentic Akshar Yoga practice environment and reception lounge in Bangalore, India</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://aksharyoga.com/images/cse_residence.jpg</image:loc>
+      <image:title>CSE Residences - Residential Yoga Training</image:title>
+      <image:caption>Modern residential campus and state-of-the-art practice hall in Bangalore</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://aksharyoga.com/images/purantha_campus.jpg</image:loc>
+      <image:title>Akshar Yoga 40-Day Basic Residential TTC at Purantha Campus</image:title>
+      <image:caption>Outdoor Pancha Tattva Mandapam and nature sanctuary at Purantha, Bangalore, India</image:caption>
+    </image:image>
+  </url>
+</urlset>
