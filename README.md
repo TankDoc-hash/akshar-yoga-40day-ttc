@@ -3,7 +3,7 @@
 A high-conversion landing page for **Akshar Yoga's Basic Level Residential Teacher Training Course**, tailored for Meta Ads and Google Ads targeting domestic Indian and international audiences.
 
 ---
-
+.
 ## Design Scheme & Visual Identity
 
 Engineered in alignment with the **Quiet Luxury & Wellness Retreat** aesthetic:
