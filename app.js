@@ -132,16 +132,54 @@
   }
 
   // --- Modal Management ---
+  // --- Modal Management ---
   function openModal(modalId) {
+    // 1. Close any currently open modals first so modals never overlap or obscure each other
+    document.querySelectorAll('.modal-backdrop.open').forEach(m => {
+      if (m.id !== modalId) {
+        closeModal(m.id);
+      }
+    });
+
+    // 2. Also close mobile nav drawer if open
+    const mobileNav = document.getElementById('mobile-nav-backdrop');
+    if (mobileNav && mobileNav.classList.contains('open')) {
+      mobileNav.classList.remove('open');
+      mobileNav.setAttribute('aria-hidden', 'true');
+    }
+
     const modal = document.getElementById(modalId);
     if (!modal) return;
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
 
+    // 3. Reset application wizard form if opening application modal
+    if (modalId === 'modal-application') {
+      const step1El = document.getElementById('form-step-1');
+      const step2El = document.getElementById('form-step-2');
+      const formEl = document.getElementById('application-wizard-form');
+      const successEl = document.getElementById('application-success-view');
+      const submitBtn = formEl ? formEl.querySelector('button[type="submit"]') : null;
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>Send Application</span><svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
+      }
+      if (step1El) step1El.style.display = 'block';
+      if (step2El) step2El.style.display = 'none';
+      if (formEl) formEl.style.display = 'block';
+      if (successEl) successEl.style.display = 'none';
+      const ind1 = document.getElementById('indicator-step-1');
+      const ind2 = document.getElementById('indicator-step-2');
+      if (ind1) { ind1.classList.add('active'); ind1.classList.remove('completed'); }
+      if (ind2) { ind2.classList.remove('active'); ind2.classList.remove('completed'); }
+    }
+
     // Focus first input or close button
-    const focusable = modal.querySelector('input, select, textarea, button');
-    if (focusable) focusable.focus();
+    setTimeout(() => {
+      const focusable = modal.querySelector('input:not([type="hidden"]), select, textarea, button');
+      if (focusable) focusable.focus();
+    }, 120);
   }
 
   function closeModal(modalId) {
@@ -149,7 +187,12 @@
     if (!modal) return;
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+    
+    // Check if any other modal is still open before restoring body scroll
+    const remainingOpen = document.querySelectorAll('.modal-backdrop.open');
+    if (remainingOpen.length === 0) {
+      document.body.style.overflow = '';
+    }
   }
 
   function initModals() {
@@ -249,35 +292,58 @@
     const indicator1 = document.getElementById('indicator-step-1');
     const indicator2 = document.getElementById('indicator-step-2');
 
+    function showStepError(msg, targetInput) {
+      let notice = document.getElementById('step-1-error-notice');
+      if (!notice && step1El) {
+        notice = document.createElement('div');
+        notice.id = 'step-1-error-notice';
+        notice.style.cssText = 'padding: 10px 14px; margin-bottom: 16px; border-radius: 4px; font-size: 0.84rem; background-color: #FFF5F5; color: #C53030; border: 1px solid #FEB2B2; text-align: center; font-weight: 500;';
+        step1El.insertBefore(notice, step1El.firstChild);
+      }
+      if (notice) {
+        notice.innerText = msg;
+        notice.style.display = 'block';
+      }
+      if (targetInput) {
+        targetInput.style.borderColor = '#C53030';
+        targetInput.focus();
+      }
+    }
+
+    function clearStepErrors() {
+      const notice = document.getElementById('step-1-error-notice');
+      if (notice) notice.style.display = 'none';
+      const inputs = step1El ? step1El.querySelectorAll('.form-input, .form-select') : [];
+      inputs.forEach(inp => inp.style.borderColor = '');
+    }
+
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
+        clearStepErrors();
+
         // Validate Step 1
         const nameInput = document.getElementById('app-name');
         const emailInput = document.getElementById('app-email');
         const phoneInput = document.getElementById('app-phone');
         const countryInput = document.getElementById('app-country');
 
-        if (!nameInput.value.trim()) {
-          nameInput.focus();
-          alert('Please enter your full name.');
+        if (!nameInput || !nameInput.value.trim()) {
+          showStepError('Please enter your full name to proceed.', nameInput);
           return;
         }
 
-        if (!emailInput.value.trim() || !validateEmail(emailInput.value)) {
-          emailInput.focus();
-          alert('Please enter a valid email address.');
+        if (!emailInput || !emailInput.value.trim() || !validateEmail(emailInput.value)) {
+          showStepError('Please enter a valid email address.', emailInput);
           return;
         }
 
-        if (!phoneInput.value.trim() || phoneInput.value.trim().length < 6) {
-          phoneInput.focus();
-          alert('Please enter a valid phone or WhatsApp number.');
+        if (!phoneInput || !phoneInput.value.trim() || phoneInput.value.trim().length < 6) {
+          showStepError('Please enter a valid phone or WhatsApp number.', phoneInput);
           return;
         }
 
-        if (!countryInput.value) {
-          countryInput.focus();
-          alert('Please select your country of residence.');
+        if (!countryInput || !countryInput.value) {
+          showStepError('Please select your country of residence.', countryInput);
           return;
         }
 
@@ -287,6 +353,10 @@
         indicator1.classList.add('completed');
         indicator2.classList.add('active');
         trackEvent('cta_click', { cta_name: 'application_step_1_complete' });
+
+        // Focus first control in Step 2
+        const firstStep2 = step2El.querySelector('select, input, button');
+        if (firstStep2) firstStep2.focus();
       });
     }
 
@@ -337,7 +407,7 @@
         country: data.country
       });
 
-      // Show Success View
+      // Show Success View & Auto-Redirect to WhatsApp
       showFormSuccess(data.fullName, data.preferred_option);
     });
   }
@@ -353,13 +423,36 @@
     if (successNameEl) successNameEl.innerText = applicantName || 'Namaste';
 
     // Build personalized WhatsApp link
-    const tierInfo = CONFIG.tiers[selectedTier] || CONFIG.tiers['cse-residential'];
+    const tierInfo = CONFIG.tiers[selectedTier] || CONFIG.tiers['immersive'];
     const message = encodeURIComponent(
-      `Namaste Akshar Yoga Admissions, I have just submitted my application for the 40-Day Basic Residential TTC (${tierInfo.name}). My name is ${applicantName}. Could you please guide me on the next steps?`
+      `Namaste Akshar Yoga Admissions, I have just submitted my application for the 40-Day Basic Residential TTC (${tierInfo.name} Tier - ${tierInfo.price}). My name is ${applicantName}. Could you please guide me on the next steps?`
     );
+    const waUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${message}`;
     if (whatsappBtn) {
-      whatsappBtn.href = `https://wa.me/${CONFIG.whatsappNumber}?text=${message}`;
+      whatsappBtn.href = waUrl;
     }
+
+    // Auto-redirect notice & countdown
+    let redirectNotice = document.getElementById('redirect-countdown-notice');
+    if (!redirectNotice && successBox) {
+      redirectNotice = document.createElement('p');
+      redirectNotice.id = 'redirect-countdown-notice';
+      redirectNotice.style.cssText = 'font-size: 0.86rem; color: var(--color-taupe); margin-top: 14px; font-weight: 600; text-align: center;';
+      successBox.appendChild(redirectNotice);
+    }
+
+    let countdown = 3;
+    if (redirectNotice) redirectNotice.innerText = `Redirecting you to WhatsApp in ${countdown}s...`;
+    const timer = setInterval(() => {
+      countdown--;
+      if (redirectNotice && countdown > 0) {
+        redirectNotice.innerText = `Redirecting you to WhatsApp in ${countdown}s...`;
+      } else if (countdown <= 0) {
+        clearInterval(timer);
+        if (redirectNotice) redirectNotice.innerText = 'Connecting to WhatsApp...';
+        window.location.href = waUrl;
+      }
+    }, 1000);
   }
 
   function validateEmail(email) {
@@ -388,6 +481,11 @@
         phone: data.callbackPhone
       });
 
+      const message = encodeURIComponent(
+        `Namaste Akshar Yoga Admissions, I requested a callback regarding the 40-Day Basic Residential TTC. My name is ${data.callbackName || ''}, and my preferred time is ${data.callbackTime || 'Afternoon'}.`
+      );
+      const waUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${message}`;
+
       callbackForm.innerHTML = `
         <div class="modal-success-state">
           <div class="success-icon-wrap">
@@ -396,12 +494,27 @@
             </svg>
           </div>
           <h3 class="serif">Request Received</h3>
-          <p>Thank you. Our admissions counselor will call you within the scheduled window.</p>
-          <a href="https://wa.me/${CONFIG.whatsappNumber}?text=Namaste,%20I%20requested%20a%20callback%20regarding%20the%2040-Day%20TTC" class="btn btn-whatsapp" target="_blank" rel="noopener">
-            Need Immediate Assistance? Chat on WhatsApp
+          <p>Thank you, <strong>${data.callbackName || ''}</strong>. Our admissions counselor will call you within your requested window.</p>
+          <a href="${waUrl}" class="btn btn-whatsapp" style="width: 100%; justify-content: center; margin-top: 14px;">
+            Chat on WhatsApp Immediately →
           </a>
+          <p id="callback-redirect-timer" style="font-size: 0.82rem; color: var(--color-taupe); margin-top: 12px; font-weight: 600; text-align: center;">
+            Redirecting to WhatsApp in 3s...
+          </p>
         </div>
       `;
+
+      let sec = 3;
+      const cbTimer = setInterval(() => {
+        sec--;
+        const timerEl = document.getElementById('callback-redirect-timer');
+        if (timerEl && sec > 0) {
+          timerEl.innerText = `Redirecting to WhatsApp in ${sec}s...`;
+        } else if (sec <= 0) {
+          clearInterval(cbTimer);
+          window.location.href = waUrl;
+        }
+      }, 1000);
     });
   }
 
